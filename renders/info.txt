@@ -1,0 +1,9 @@
+CPU: Intel© Core™ i3-6006U CPU @ 2.00GHz
+
+yakuza_just_had_a_party.png
+---------------------------
+resolution:             1920x1080    (100%)
+render time:            09:18        (minutes:seconds)
+noise reduction:        yes
+number of materials:    44
+made with:              Blender v2.80.75
