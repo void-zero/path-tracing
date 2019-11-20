@@ -1,8 +1,16 @@
-EXECUTABLE = swpathtracer
+EXECUTABLE = raytracer
+
+SRCDIR = src
+OBJDIR = obj
+INCDIR = include
+
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SOURCES))
 
 CXX = g++
-
-CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic -fopenmp
+BITS_OPTION = -m64
+CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic -fopenmp -I$(INCDIR)/
+LDLIBS = -lm -lpthread
 
 ifeq ($(DEBUG), 1)
 CXXFLAGS += -DDEBUG -O0 -g3
@@ -11,34 +19,27 @@ CXXFLAGS += -DNDEBUG -O3 -g0
 endif
 
 CPPFLAGS += -MMD \
-			-I../../../../work/common/glm-0.9.7.0 \
-			-I/usr/local/include
+			-I/usr/local/include/
 
-LDFLAGS = -L/usr/lib/gcc/x86_64-linux-gnu/4.8 \
-		  -L/usr/lib/x86_64-linux-gnu \
-		  -L/usr/lib \
-	      -L/usr/local/lib
-
-LDLIBS =
-
-SOURCES = $(wildcard *.cpp)
-
-OBJECTS = $(SOURCES:.cpp=.o)
-
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJECTS)
-	$(CXX) $^ -o $@ $(LDLIBS)
-
-.cpp.o:
+$(EXECUTABLE): $(OBJECTS) 
+	@echo  "\033[31m \nLinking all objects files: \033[0m"
+	$(CXX) $(BITS_OPTION) $(OBJECTS) -o $@ $(LDLIBS)
 
 -include $(OBJECTS:.o=.d)
 
-.PHONY: clean distclean
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@echo  "\033[31m \nCompiling $<: \033[0m"
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo  "\033[32m \nCreating $< dependency file: \033[0m"
+	$(CXX) -std=c++11  -MM $< > $(basename $@).d
+	@mv -f $(basename $@).d $(basename $@).d.tmp
+	@sed -e 's|.*:|$(basename $@).o:|' < $(basename $@).d.tmp > $(basename $@).d
+	@rm -f $(basename $@).d.tmp
 
 clean:
-	rm *.o *.d
+	@echo "\033[31mCleaning obj directory... \033[0m"
+	@rm $(EXECUTABLE) -f $(OBJDIR)/*.o $(OBJDIR)/*.d
 
-distclean: clean
-	rm $(EXECUTABLE)
+
+rebuild: clean $(EXECUTABLE)
 

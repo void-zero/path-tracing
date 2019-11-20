@@ -1,4 +1,4 @@
-#include "buffer.h"
+#include "include/buffer.h"
 
 // Creates a image buffer with default size (512 x 512 pixels)
 Buffer::Buffer( void )

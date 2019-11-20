@@ -1,4 +1,8 @@
-#include "main.h"
+#include "include/camera.h"
+#include "include/orthographic_camera.h"
+#include "include/scene.h"
+#include "include/buffer.h"
+#include "include/raytracer.h"
 
 int main( void )
 {
@@ -29,7 +33,7 @@ int main( void )
     rt.integrate(); // Renders the final image.
 
     // Save the rendered image to a .ppm file.
-    rendering_buffer.save( "output_image.ppm" );
+    rendering_buffer.save( "../renders/output_image.ppm" );
 
     return EXIT_SUCCESS;
 }

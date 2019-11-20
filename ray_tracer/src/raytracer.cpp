@@ -1,4 +1,4 @@
-#include "raytracer.h"
+#include "include/raytracer.h"
 
 RayTracer::RayTracer( Camera &camera,
                       const Scene &scene,
