@@ -33,7 +33,7 @@ int main( void )
     rt.integrate(); // Renders the final image.
 
     // Save the rendered image to a .ppm file.
-    rendering_buffer.save( "../renders/output_image.ppm" );
+    rendering_buffer.save( "renders/output_image.ppm" );
 
     return EXIT_SUCCESS;
 }

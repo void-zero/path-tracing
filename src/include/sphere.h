@@ -3,8 +3,6 @@
 
 #include <glm/glm.hpp>
 #include "primitive.h"
-#include "intersection_record.h"
-#include "ray.h"
 
 class Sphere : public Primitive
 {

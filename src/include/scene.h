@@ -7,7 +7,6 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include "primitive.h"
 #include "sphere.h" 
 
 class Scene

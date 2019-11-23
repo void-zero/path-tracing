@@ -3,8 +3,9 @@ yakuza_just_had_a_party.png
 
 A Yakuza office after a party.
 
-resolution:             1920x1080  (100% scale)
-render time:            09:18      (minutes:seconds) with a Intel© Core™ i3-6006U CPU @ 2.00GHz      
-noise reduction:        yes
+resolution:             1920x1080            (100% scale)
+render time(m:s):       43:11 - 500 samples             
+                        09:18 - 100 samples  (Denoised) 
+CPU: Intel© Core™ i3-6006U CPU @ 2.00GHz         
 number of materials:    44
-made with:              Blender    (v2.80.75)
+made with:              Blender              (v2.80.75)

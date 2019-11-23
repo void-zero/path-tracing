@@ -1,4 +1,4 @@
-EXECUTABLE = raytracer
+EXECUTABLE = ptracer
 
 SRCDIR = src
 OBJDIR = obj
