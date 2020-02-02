@@ -6,9 +6,9 @@
 
 class Triangle : public Primitive{
     public:
-        glm::vec3 v_[3] = {{0.0f, 0.0f, 0.0f},   //Triangle vertexes
-                          {0.0f, 0.0f, 0.0f},
-                          {0.0f, 0.0f, 0.0f}};
+        glm::vec3 v_[3];   //Triangle vertices
+
+        glm::vec3 edge_[2];
 
         bool intersect( const Ray &ray,
                         IntersectionRecord &intersection_record ) const;

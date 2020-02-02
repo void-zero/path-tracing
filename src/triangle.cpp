@@ -5,7 +5,8 @@ Triangle::Triangle(){}
 Triangle::Triangle( const glm::vec3 &v0,
                     const glm::vec3 &v1,
                     const glm::vec3 &v2) :
-        v_{v0, v1, v2}
+        v_{v0, v1, v2},
+		edge_{v_[1] - v_[0], v_[2] - v_[0]}
 {}
 
 bool Triangle::intersect( const Ray &ray,
@@ -19,9 +20,9 @@ bool Triangle::intersect( const Ray &ray,
      *     Academic Press.
      *     1997.
      */
-	glm::vec3 edge[2] = {v_[1] - v_[0], v_[2] - v_[0]};
-	glm::vec3 pVec = glm::cross(ray.direction_, edge[1]);
-	double det = glm::dot(edge[0], pVec);
+
+	glm::vec3 pVec = glm::cross(ray.direction_, edge_[1]);
+	double det = glm::dot(edge_[0], pVec);
 	
 	if(det > -DBL_EPSILON && det < DBL_EPSILON)	// Checking if the ray is parallel to the triangle, meaning that there is no intersection
 		return false;
@@ -33,12 +34,12 @@ bool Triangle::intersect( const Ray &ray,
 	if(record.u_ < 0.0f || record.u_ > 1.0f)
 		return false;
 
-	glm::vec3 qVec = glm::cross(tVec, edge[0]);
+	glm::vec3 qVec = glm::cross(tVec, edge_[0]);
 	record.v_ = glm::dot(ray.direction_, qVec) * invDet;
 	if(record.v_ < 0.0f || record.u_ + record.v_ > 1.0f)
 		return false;
 
-	record.t_ = glm::dot(edge[1], qVec) * invDet;
+	record.t_ = glm::dot(edge_[1], qVec) * invDet;
 
 	return true;
 }
