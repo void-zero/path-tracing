@@ -6,7 +6,7 @@
 
 class Triangle : public Primitive{
     public:
-        glm::vec3 v[3] = {{0.0f, 0.0f, 0.0f},
+        glm::vec3 v_[3] = {{0.0f, 0.0f, 0.0f},   //Triangle vertexes
                           {0.0f, 0.0f, 0.0f},
                           {0.0f, 0.0f, 0.0f}};
 

@@ -10,7 +10,7 @@ Sphere::Sphere( const glm::vec3 &center,
 {}
 
 bool Sphere::intersect( const Ray &ray,
-                        IntersectionRecord &intersection_record ) const
+                        IntersectionRecord &record ) const
 {
     /* Ray-sphere intersection test adapted from the very efficient algorithm presented in the article:
      *
@@ -38,9 +38,9 @@ bool Sphere::intersect( const Ray &ray,
     }
 
     // Set the intersection record
-    intersection_record.t_ =  ( t1 > 0.00001f ) ? t1 : t2;
-    intersection_record.position_ = ray.origin_ + intersection_record.t_ * ray.direction_;
-    intersection_record.normal_ = glm::normalize( intersection_record.position_ - center_ );
+    record.t_ =  ( t1 > 0.00001f ) ? t1 : t2;
+    record.position_ = ray.origin_ + record.t_ * ray.direction_;
+    record.normal_ = glm::normalize( record.position_ - center_ );
 
     return true;
 }

@@ -7,6 +7,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#include "triangle.h"
 #include "sphere.h" 
 
 class Scene
