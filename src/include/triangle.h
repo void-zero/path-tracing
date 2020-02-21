@@ -6,10 +6,13 @@
 #include "primitive.h"
 
 #ifndef MEMORY_LIMITATION
-    #include "triaccel.h"
+    #define pu mod3_[p_axis_+1] // Projection U axis
+    #define pv mod3_[p_axis_+2] // Projection V axis
 
-    #define pu mod3_[tas_.p_axis+1] // Projection U axis
-    #define pv mod3_[tas_.p_axis+2] // Projection V axis
+    struct edge{
+        float nu;
+        float nv;
+    };
 #endif
 
 class Triangle : public Primitive{
@@ -17,8 +20,15 @@ class Triangle : public Primitive{
         glm::vec3 v_[3];   //Triangle vertices
 
         #ifndef MEMORY_LIMITATION
-            TriAccel tas_; // Triangle Acceleration Structure
-            char mod3_[5] = {0, 1, 2, 0, 1};
+            float normal_u_;
+            float normal_v_;
+            float normal_d_;
+
+            char p_axis_; // Projection Axis
+
+            edge edge_[2]; 
+            
+            const char mod3_[5] = {0, 1, 2, 0, 1};
         #else
             glm::vec3 edge_[2];
         #endif
