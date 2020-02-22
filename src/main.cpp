@@ -1,28 +1,41 @@
 #include "include/camera.h"
 #include "include/orthographic_camera.h"
+#include "include/perspective_camera.h"
 #include "include/scene.h"
 #include "include/buffer.h"
 #include "include/raytracer.h"
 #include <chrono>
 
-int main( void )
+int main(int argc, char** argv)
 {
-    unsigned int x_resolution = 512;
-    unsigned int y_resolution = 512;
+    unsigned int x_resolution = 1024;
+    unsigned int y_resolution = 1024;
     std::chrono::high_resolution_clock::time_point t0, t1; // Time points used to measure the render time
-
-    OrthographicCamera camera{ -1.25f, 
-                                1.25f, 
-                               -1.25f, 
-                                1.25f,
-                                glm::ivec2{ x_resolution, y_resolution }, 
-                                glm::vec3{ 0.0f, 0.0f,  1.0f },     // position
-                                glm::vec3{ 0.0f, 1.0f,  0.0f },     // up
-                                glm::vec3{ 0.0f, 0.0f, -1.0f } };   // look at
+    PerspectiveCamera camera{ -1.25f, 
+                               1.25f, 
+                              -1.25f, 
+                               1.25f,
+                               3.0f,
+                               glm::ivec2{ x_resolution, y_resolution }, 
+                               glm::vec3{ 0.0f, 0.0f,  1.0f },     // position
+                               glm::vec3{ 0.0f, 1.0f,  0.0f },     // up
+                               glm::vec3{ 0.0f, 0.0f, -1.0f } };   // look at
     Scene scene{};
+    std::string img_dest;
+
+    if(argc >= 2){
+        img_dest = argv[1];
+        if(argc == 3){
+            img_dest += argv[2];
+            img_dest += ".ppm";
+        } 
+        else
+            img_dest += "out.ppm";
+    }
+    else
+        img_dest = "renders/out.ppm";
     
     t0 = std::chrono::high_resolution_clock::now();
-
     scene.load();
 
     Buffer rendering_buffer{ x_resolution, y_resolution };
@@ -37,11 +50,10 @@ int main( void )
     rt.integrate(); // Renders the final image.
 
     t1 = std::chrono::high_resolution_clock::now();
-
     std::cout << "\nRender time: " << (double) std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count()/1000000000 << " (s)\n";
 
     // Save the rendered image to a .ppm file.
-    rendering_buffer.save( "renders/Assignment 2/triangle.ppm" );
+    rendering_buffer.save( img_dest );
 
     return EXIT_SUCCESS;
 }

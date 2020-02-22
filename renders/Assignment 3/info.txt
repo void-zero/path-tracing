@@ -1,0 +1,4 @@
+---------=== perspective.ppm ===------------
+Render time: 0.0596005 (s)
+Camera: Pin hole
+Number of primitives: 5 (4 circles, 1 triangle)
