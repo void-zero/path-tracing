@@ -2,3 +2,15 @@
 Render time: 0.0596005 (s)
 Camera: Pin hole
 Number of primitives: 5 (4 circles, 1 triangle)
+
+
+---------=== mesh_low.ppm ===------------
+Render time:  29.2034 (s)
+Camera: Pin hole
+Number of primitives: 968 (only triangles)
+
+
+---------=== mesh.ppm ===------------
+Render time:  99.2205 (s)
+Camera: Pin hole
+Number of primitives: 3936 (only triangles)

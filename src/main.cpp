@@ -8,9 +8,11 @@
 
 int main(int argc, char** argv)
 {
-    unsigned int x_resolution = 1024;
-    unsigned int y_resolution = 1024;
+    unsigned x_resolution = 1024;
+    unsigned y_resolution = 1024;
+
     std::chrono::high_resolution_clock::time_point t0, t1; // Time points used to measure the render time
+    
     PerspectiveCamera camera{ -1.25f, 
                                1.25f, 
                               -1.25f, 
@@ -20,7 +22,7 @@ int main(int argc, char** argv)
                                glm::vec3{ 0.0f, 0.0f,  1.0f },     // position
                                glm::vec3{ 0.0f, 1.0f,  0.0f },     // up
                                glm::vec3{ 0.0f, 0.0f, -1.0f } };   // look at
-    Scene scene{};
+    
     std::string img_dest;
 
     if(argc >= 2){
@@ -34,12 +36,17 @@ int main(int argc, char** argv)
     }
     else
         img_dest = "renders/out.ppm";
-    
-    t0 = std::chrono::high_resolution_clock::now();
-    scene.load();
+
+    TriangleMesh model{"models/monkey.obj"};
+    std::cout << "Number of primitives: " << model.triangles_.size() << "\n";
+
+    Scene scene{};
+    scene.addMesh(model);
 
     Buffer rendering_buffer{ x_resolution, y_resolution };
     glm::vec3 background_color{ 0.0f, 0.0f, 0.0f };
+
+    t0 = std::chrono::high_resolution_clock::now();
 
     // Set up the renderer.
     RayTracer rt( camera,
