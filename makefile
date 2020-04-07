@@ -10,7 +10,7 @@ OBJECTS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SOURCES))
 CXX = g++
 BITS_OPTION = -m64
 CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic -fopenmp -I$(INCDIR)/
-LDLIBS = -lm -lpthread -lassimp
+LDLIBS = -lm -lpthread -lassimp -fopenmp
 
 ifeq ($(DEBUG), 1)
 CXXFLAGS += -DDEBUG -O0 -g3

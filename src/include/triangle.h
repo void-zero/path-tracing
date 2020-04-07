@@ -3,7 +3,10 @@
 
 #include <glm/glm.hpp>
 #include <cmath>
+
 #include "primitive.h"
+
+#define EPSILON 0.0001f
 
 #ifndef MEMORY_LIMITATION
     #define pu mod3_[p_axis_+1] // Projection U axis
@@ -15,9 +18,11 @@
     };
 #endif
 
-class Triangle : public Primitive{
+class Triangle : public Primitive
+{
     public:
         glm::vec3 v_[3];   //Triangle vertices
+        glm::vec3 normal_;
 
         #ifndef MEMORY_LIMITATION
             float normal_u_;
@@ -36,10 +41,10 @@ class Triangle : public Primitive{
         bool intersect( const Ray &ray,
                         IntersectionRecord &intersection_record ) const;
 
-        Triangle();
-        Triangle(const glm::vec3 &v0,
-                 const glm::vec3 &v1,
-                 const glm::vec3 &v2);
+        Triangle( const glm::vec3 &v0,
+                  const glm::vec3 &v1,
+                  const glm::vec3 &v2,
+                  Material::MaterialSharedPtr material );
         
 };
 

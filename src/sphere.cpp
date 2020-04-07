@@ -1,10 +1,9 @@
 #include "include/sphere.h"
 
-Sphere::Sphere( void )
-{}
-
 Sphere::Sphere( const glm::vec3 &center,
-                float radius ) :
+                float radius,
+                Material::MaterialSharedPtr material ) :
+        Primitive::Primitive(material),
         center_{ center },
         radius_{ radius }
 {}
@@ -39,8 +38,8 @@ bool Sphere::intersect( const Ray &ray,
 
     // Set the intersection record
     record.t_ =  ( t1 > 0.00001f ) ? t1 : t2;
-    record.position_ = ray.origin_ + record.t_ * ray.direction_;
-    record.normal_ = glm::normalize( record.position_ - center_ );
+    record.point_ = ray.origin_ + record.t_ * ray.direction_;
+    record.normal_ = glm::normalize( record.point_ - center_ );
 
     return true;
 }

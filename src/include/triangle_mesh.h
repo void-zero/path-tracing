@@ -9,14 +9,16 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-class TriangleMesh{
+class TriangleMesh
+{
     public:
+        TriangleMesh( const std::string &file_path, Material::MaterialSharedPtr material );
+
+        // void load(const std::string &file_path);
+
         std::vector<Triangle*> triangles_;
 
-        TriangleMesh();
-        TriangleMesh(const char* file_path);
-
-        void load(const char* file_path);
+        Material::MaterialSharedPtr material_;
 };
 
 #endif  // TRIANGLE_MESH_

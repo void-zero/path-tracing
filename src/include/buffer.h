@@ -7,6 +7,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#define GAMMA 0.45454545f
+
 class Buffer
 {
 public:

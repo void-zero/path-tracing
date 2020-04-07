@@ -10,6 +10,9 @@
 #include "triangle.h"
 #include "triangle_mesh.h"
 #include "sphere.h" 
+#include "diffuse.h"
+#include "emmiter.h"
+#include "perfect_mirror.h"
 
 class Scene
 {
@@ -25,7 +28,7 @@ class Scene
 
         void load( void );
         
-        void addMesh(TriangleMesh &mesh);
+        void addMesh( const TriangleMesh &mesh );
 };
 
 #endif /* SCENE_H_ */

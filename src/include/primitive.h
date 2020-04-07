@@ -5,6 +5,7 @@
 
 #include "ray.h"
 #include "intersection_record.h"
+#include "material.h"
 
 class Primitive
 {
@@ -12,7 +13,9 @@ public:
 
     typedef std::unique_ptr< Primitive > PrimitiveUniquePtr;
 
-    Primitive( void );
+    Material::MaterialSharedPtr material_;
+
+    Primitive( Material::MaterialSharedPtr material );
 
     virtual ~Primitive( void );
 

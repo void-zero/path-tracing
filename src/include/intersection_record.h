@@ -6,11 +6,11 @@
 struct IntersectionRecord
 {
     float t_;
-    float u_;
-    float v_;
-    
-    glm::vec3 position_;
     glm::vec3 normal_;
+    glm::vec3 point_;
+
+    // Index of the collided primitive in the scene primitives vector
+    std::size_t id_;
 };
 
 #endif /* INTERSECTION_RECORD_H_ */
