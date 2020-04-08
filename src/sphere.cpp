@@ -37,7 +37,7 @@ bool Sphere::intersect( const Ray &ray,
     }
 
     // Set the intersection record
-    record.t_ =  ( t1 > 0.00001f ) ? t1 : t2;
+    record.t_ =  ( t1 > EPSILON ) ? t1 : t2;
     record.point_ = ray.origin_ + record.t_ * ray.direction_;
     record.normal_ = glm::normalize( record.point_ - center_ );
 

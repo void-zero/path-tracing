@@ -7,6 +7,8 @@
 #include "intersection_record.h"
 #include "material.h"
 
+#define EPSILON 0.0001f
+
 class Primitive
 {
 public:

@@ -29,17 +29,27 @@ bool Scene::intersect( const Ray &ray,
 void Scene::load( void ) 
 {
     auto emmiter = Material::MaterialSharedPtr(new Emmiter{20.0f, 20.0f, 20.0f});
+
     auto red = Material::MaterialSharedPtr(new Diffuse{.75f, .25f, .25f});
+    auto green = Material::MaterialSharedPtr(new Diffuse{.25f, .75f, .25f});
     auto blue = Material::MaterialSharedPtr(new Diffuse{.25f, .25f, .75f});
     auto grey = Material::MaterialSharedPtr(new Diffuse{.25f, .25f, .25f});
     auto white = Material::MaterialSharedPtr(new Diffuse{.75f, .75f, .75f});
+
+    auto purple = Material::MaterialSharedPtr(new PerfectMirror{1.0f, .9f, 1.0f});
     auto perfect_mirror = Material::MaterialSharedPtr(new PerfectMirror);
 
     TriangleMesh human{"models/human.obj", Material::MaterialSharedPtr(grey)};
     addMesh(human);
 
-    TriangleMesh walls{"models/walls.obj", Material::MaterialSharedPtr(white)};
-    addMesh(walls);
+    TriangleMesh floor{"models/floor.obj", Material::MaterialSharedPtr(white)};
+    addMesh(floor);
+
+    TriangleMesh roof{"models/roof.obj", Material::MaterialSharedPtr(white)};
+    addMesh(roof);
+
+    TriangleMesh back_wall{"models/back_wall.obj", Material::MaterialSharedPtr(white)};
+    addMesh(back_wall);
 
     TriangleMesh left_wall{"models/left_wall.obj", Material::MaterialSharedPtr(red)};
     addMesh(left_wall);
@@ -50,10 +60,13 @@ void Scene::load( void )
     TriangleMesh mirror{"models/mirror.obj", Material::MaterialSharedPtr(perfect_mirror)};
     addMesh(mirror);
 
-    primitives_.push_back( Primitive::PrimitiveUniquePtr( new Sphere{glm::vec3(1.0f, -16.3f, -2.7f), 2.0f, emmiter} ) );
+    primitives_.push_back( Primitive::PrimitiveUniquePtr( new Sphere{glm::vec3(6.25f, -2.0f, -8.0f), 2.75f, purple} ) );
+    primitives_.push_back( Primitive::PrimitiveUniquePtr( new Sphere{glm::vec3(2.0f, -0.7f, -7.5f), 1.5f, green} ) );
+
+    primitives_.push_back( Primitive::PrimitiveUniquePtr( new Sphere{glm::vec3(1.0f, -16.3f, -2.7f), 2.75f, emmiter} ) );
 }
 
-inline void Scene::addMesh(const TriangleMesh &mesh)
+void Scene::addMesh(const TriangleMesh &mesh)
 {
     for(unsigned i = 0; i < mesh.triangles_.size(); i++)
             primitives_.push_back(Primitive::PrimitiveUniquePtr(mesh.triangles_[i]));

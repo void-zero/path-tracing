@@ -6,8 +6,6 @@
 
 #include "primitive.h"
 
-#define EPSILON 0.0001f
-
 #ifndef MEMORY_LIMITATION
     #define pu mod3_[p_axis_+1] // Projection U axis
     #define pv mod3_[p_axis_+2] // Projection V axis
