@@ -49,7 +49,7 @@ private:
 
     Ray getRayInHemisphere( const IntersectionRecord &record );
 
-    Ray getReflectedRay( const Ray &ray, const IntersectionRecord &record ) const;
+    Ray getReflectedRay( const Ray &ray, const IntersectionRecord &record, float cos ) const;
 
     float random( void );
 

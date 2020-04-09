@@ -27,7 +27,7 @@ bool Sphere::intersect( const Ray &ray,
     float v = glm::dot( eo, ray.direction_ );
     float disc = ( radius_ * radius_ ) - ( glm::dot( eo, eo ) - ( v * v ) );
 
-    if ( disc < 0.0f )
+    if ( disc < EPSILON )
         return false;                           // no intersection
     else
     {

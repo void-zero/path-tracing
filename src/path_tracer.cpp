@@ -35,7 +35,7 @@ Ray PathTracer::getRayInHemisphere( const IntersectionRecord &record )
     float phi = 2 * PI_FLOAT * r2;
 
     return Ray
-    { record.point_, 
+    { record.point_ + (record.normal_*EPSILON), 
       glm::vec3{ 
           glm::normalize( 
               glm::vec3{glm::sin(theta) * glm::cos(phi),  // X
@@ -47,9 +47,9 @@ Ray PathTracer::getRayInHemisphere( const IntersectionRecord &record )
     };        
 }
 
-inline Ray PathTracer::getReflectedRay( const Ray &ray, const IntersectionRecord &record ) const
+inline Ray PathTracer::getReflectedRay( const Ray &ray, const IntersectionRecord &record, float cos ) const
 {
-    return Ray{ record.point_, ray.direction_ - 2.0f * record.normal_ * glm::dot(ray.direction_, record.normal_) };
+    return Ray{ record.point_ + (record.normal_*EPSILON), ray.direction_ - 2.0f * record.normal_ * cos };
 }
 
 glm::vec3 PathTracer::rayRadiance( const Ray &ray, int current_depth ){
@@ -75,7 +75,9 @@ glm::vec3 PathTracer::rayRadiance( const Ray &ray, int current_depth ){
             break;
 
         case Material::Type::MIRROR:
-            radiance_out = scene_.primitives_[record.id_]->material_->reflectance_ * rayRadiance(getReflectedRay( ray, record ), ++current_depth);
+            cos =  glm::dot(record.normal_, ray.direction_);
+
+            radiance_out = scene_.primitives_[record.id_]->material_->reflectance_ * rayRadiance(getReflectedRay( ray, record, cos ), ++current_depth);
             break;
 
         case Material::Type::EMMITER:
