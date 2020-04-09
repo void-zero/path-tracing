@@ -45,6 +45,8 @@ int main(int argc, char** argv)
     Scene scene{};
     scene.load();
 
+    std::cout << "Number of primitives: " << scene.primitives_.size();
+
     Buffer rendering_buffer{ x_resolution, y_resolution };
     glm::vec3 background_color{ 0.0f, 0.0f, 0.0f };
 

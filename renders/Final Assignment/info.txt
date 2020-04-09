@@ -1,0 +1,27 @@
+All images were generated using the following settings:
+    Hardware: AMD Ryzen 5 3600 @ 3.6GHz with parallel processing (OpenMP)
+    Resolution: 1024x768 with gamma compression
+    Camera: Perspective
+    Number of primitives: 609 (only 3 spheres)
+    Materials: 8 (1 emmiter, 5 diffuse, 2 perfect mirror)
+    
+The scene was inspired by the smallpt's Cornell Box and by SUPERHOT's visual style.
+    
+---------=== final_render.ppm ===------------
+Render time: 10728.8 (s)
+Samples: 2500
+
+---------=== wrong_render.ppm ===------------
+In this render, we had a problem with the positioning of the reflected rays, causing the artifacts visible in the scene spheres.
+Render time:  43085.6 (s)
+Samples: 10000
+
+---------=== colored_mirror.ppm ===------------
+Just trying out the possibility of coloring a mirror.
+Render time: 435.84 (s)
+Samples: 100
+
+---------=== solo.ppm ===------------
+The scene was just a little too empty, so, more spheres!
+Render time: 430.03 (s)
+Samples: 100
